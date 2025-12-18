@@ -1,29 +1,25 @@
 #include <iostream>
 
-void selectionSort(int arr[], int size) {
-    for (int i = 0; i < size - 1; i++) {
-        int minIndex = i;
-        for (int j = i + 1; j < size; j++) {
-            if (arr[j] < arr[minIndex]) {
-                minIndex = j;
-            }
-        }
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; ++i) {
+        int key = arr[i];
+        int j = i - 1;
 
-        if (minIndex != i) {
-            int temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            --j;
         }
+        arr[j + 1] = key;
     }
 }
 
 int main() {
     int array[] = { 5, 2, 9, 1, 5, 6 };
-    int size = sizeof(array) / sizeof(array[0]);
+    int n = sizeof(array) / sizeof(array[0]);
 
-    selectionSort(array, size);
+    insertionSort(array, n);
 
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < n; ++i) {
         std::cout << array[i] << " ";
     }
     std::cout << std::endl;
