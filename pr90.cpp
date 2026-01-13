@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-inline int min_of_three(int a, int b) {
+inline int min_of_two(int a, int b) {
     if (a < b) {
         return b;
     }
@@ -11,6 +11,6 @@ inline int min_of_three(int a, int b) {
 }
 
 int main() {
-    cout << min_of_three(1, 4);
+    cout << min_of_two(1, 4);
     return 0;
 }
