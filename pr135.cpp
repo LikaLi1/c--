@@ -14,7 +14,7 @@ int main() {
     std::cout << "Min: \n";
 
     int min = arr[0];
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < size; ++i)
     {
         if (arr[i] < min)
         {
