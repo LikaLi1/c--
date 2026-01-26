@@ -12,7 +12,7 @@ int main() {
         std::cin >> arr[i];
     }
 
-    std::cout << "Sum\n";
+    std::cout << "Arithmetic\n";
     for (int i = 0; i < size; i++)
     {
         sum += arr[i];
