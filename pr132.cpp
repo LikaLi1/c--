@@ -7,7 +7,6 @@ int main() {
     int ans[10];
     int n = 0;
     int arr[size];
-    int sum = 0;
 
     std::cout << "Enter array:\n";
 
@@ -39,8 +38,6 @@ int main() {
     {
         std::cout << "No" << std::endl;
     }
-
-    std::cout << sum << std::endl;
 
     return 0;
 }
