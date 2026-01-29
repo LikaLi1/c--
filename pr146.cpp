@@ -11,4 +11,5 @@ int main() {
     {
         std::cin >> arr[i];
     }
+	return 0;
 }
