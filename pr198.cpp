@@ -14,7 +14,7 @@ int main()
     cout << "Enter N: ";
     cin >> N;
 
-    cout << "Сумма цифр числа " << N << ": " << sumDigits(N) << endl;
+    cout << "Sum " << N << ": " << sumDigits(N) << endl;
 
     return 0;
 }
@@ -35,7 +35,7 @@ int main()
 {
     int arr[] = { 3, -2, 5, 0, 7, -1 };
     int size = sizeof(arr) / sizeof(arr[0]);
-    cout << "Количество чётных элементов: " << countEven(arr, size) << endl;
+    cout << "Number of even elements: " << countEven(arr, size) << endl;
     return 0;
 }
 
@@ -54,7 +54,6 @@ double average(T arg) {
 
 template<typename T, typename... Args>
 double average(T first, Args... args) {
-    // Создаем список и считаем сумму
     double sum = first + average(args...);
     return sum;
 }
@@ -83,4 +82,183 @@ int main() {
 //Обработка ошибок
 
 
-на 6 остановилась
+#include <iostream>
+int main() {
+    int var = 5;
+    int* p;
+    p = &var;
+    *p = 10;
+    std::cout << var;
+    return 0;
+}
+
+
+// int a = 10;
+// int* p = &a;
+// (*p)++;
+// std::cout << a;
+
+
+// a изначально равно 10
+// p — указатель на a
+// (*p)++ — увеличивает значение a на 1
+// Вывод: 11
+// Итоговая строка:
+// 11
+
+
+// оба варианта допустимы и означают одно и то же: объявление указателя на int
+// int* p — стилевое предпочтение, указывающее, что p — указатель (*) на int
+// int *p — более традиционный стиль, где * сливается с типом int
+
+
+// NULL — это макрос, обычно определенный как 0
+// nullptr — это ключевое слово, введенное в C++11, представляющее нулевой указатель
+
+
+// int arr[3] = {1, 2, 3};
+// int* p = arr;
+// std::cout << *(p + 1);
+// arr — массив [1, 2, 3]
+// p — указатель на первый элемент arr[0] (значение 1)
+// *(p + 1) — это элемент массива arr[1], который равен 2
+// Итоговая строка:
+// 2
+
+
+// Сложение указателей — не определено и недопустимо, потому что не понятно, что это означает
+// Вычитание указателей — позволяет узнать, сколько элементов находится между двумя указателями
+// Сравнение указателей — часто используется для проверки, указывают ли они на один и тот же элемент или чтобы определить порядок элементов в массиве
+
+
+#include <iostream>
+
+int main() {
+    int* arr = new int[5];
+
+    for (int i = 0; i < 5; ++i) {
+        arr[i] = i + 1;
+    }
+
+    for (int i = 0; i < 5; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    delete[] arr;
+    return 0;
+}
+
+
+// Утечка памяти — выделенная динамическая память не освобождается
+// Со временем в программе может накапливаться всё больше неиспользуемых блоков памяти
+// В простых программах это не всегда заметно, но в больших или долгоживущих приложениях — может привести к снижению производительности или сбоям из-за исчерпания доступной памяти
+// Важно: Всегда вызывайте delete[], чтобы избежать утечек памяти при использовании new[] для массивов
+
+
+void incrementByValue(int num) {
+    num++;
+}
+void incrementByReference(int& num) {
+    num++;
+}
+void incrementByPointer(int* num) {
+    (*num)++;
+}
+// При передаче по значению — НЕ изменится, так как передается копия
+// При передаче по ссылке — ДА изменится, так как функция работает с оригиналом через ссылку
+// При передаче по указателю — ДА изменится, так как функция работает с адресом оригинальной переменной
+
+
+#include <iostream>
+double (*operation)(double, double);
+
+
+#include <iostream>
+double add(double a, double b) {
+    return a + b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+int main() {
+    double (*operation)(double, double);
+
+    operation = add;
+    std::cout << "Sum: " << operation(5.0, 3.0) << std::endl;
+
+    operation = multiply;
+    std::cout << "Mul: " << operation(5.0, 3.0) << std::endl;
+
+    return 0;
+}
+
+
+#include <iostream>
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b != 0) return a / b;
+    else {
+        std::cerr << "Del 0!" << std::endl;
+        return 0;
+    }
+}
+
+int main() {
+    double (*operations[])(double, double) = {add, subtract, multiply, divide};
+
+    double a = 10, b = 5;
+
+    std::cout << "Sum: " << operations[0](a, b) << std::endl;
+    std::cout << "Sub: " << operations[1](a, b) << std::endl;
+    std::cout << "Mul: " << operations[2](a, b) << std::endl;
+    std::cout << "Del: " << operations[3](a, b) << std::endl;
+
+    return 0;
+}
+
+
+#include <iostream>
+typedef int (*FuncPtr)(int);
+int multiplyByTwo(int x) {
+    return x * 2;
+}
+void processArray(int* arr, int size, FuncPtr func) {
+    for (int i = 0; i < size; ++i) {
+        arr[i] = func(arr[i]);
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    std::cout << "Before: ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    processArray(arr, size, multiplyByTwo);
+
+    std::cout << "After: ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
